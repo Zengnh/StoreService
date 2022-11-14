@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: store_service
+
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/jms_uat?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+    username: admin
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 10
+      maximum-pool-size: 30
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: HikariCP
+      max-lifetime: 900000
+      connection-timeout: 10000
+      connection-test-query: SELECT 1
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  mail:
+    default-encoding: UTF-8
+    host: smtp.qq.com
+    port: 587
+    username: 121632940@qq.com
+    password: 腾讯校验码
+
+server:
+  port: 8082
+
+  ### mybatis   mybatis-plus: 映射关系选要确定
+mybatis-plus:
+  mapper-locations: classpath:/mappers/*.xml
