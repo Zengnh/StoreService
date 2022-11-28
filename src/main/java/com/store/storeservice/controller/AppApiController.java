@@ -1,26 +1,22 @@
 package com.store.storeservice.controller;
 
-
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.store.storeservice.base.Result;
 import com.store.storeservice.bean.db.Center;
 import com.store.storeservice.bean.dto.DTOLogin;
-import com.store.storeservice.bean.dto.DtoShop;
 import com.store.storeservice.bean.vo.*;
 import com.store.storeservice.dao.CenterByTypeToMapper;
 import com.store.storeservice.dao.UserMapper;
 import io.swagger.annotations.*;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.io.InputStream;
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletResponse;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -142,9 +138,9 @@ public class AppApiController {
 
 
 //        第二种 xml 查询
-        List<Center> centerList = userMapper.selectList(null);
-
-        System.out.println("2#######" + centerList.size());
+//        List<Center> centerList = userMapper.selectList(null);
+//
+//        System.out.println("2#######" + centerList.size());
 
         int xmlcount = userMapper.countCenter();
         System.out.println("3#######" + xmlcount);
@@ -163,6 +159,99 @@ public class AppApiController {
         // 获得文件名
         String filename = file.getOriginalFilename();
         InputStream input = file.getInputStream();
+    }
+
+
+
+    @ApiOperation(value = "下载生成图片")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "成功"),
+            @ApiResponse(code = 99999, message = "失败")
+    })
+    @ResponseBody
+    @GetMapping("/testDemo2")
+    public void test2(HttpServletResponse response) {
+
+        //        测试字体库
+        OutputStream os = null;
+        InputStream is ;
+        try {
+            os = response.getOutputStream();
+            is = new FileInputStream(drawableFile());
+
+            byte[] bytes = new byte[1024];
+            int len = 0;
+            while ((len = is.read(bytes)) > 0) {
+                os.write(bytes, 0, len);
+//                os.write("发送完成".getBytes());
+            }
+            is.close();
+            os.flush();
+            os.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (os != null) {
+                try {
+                    os.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private File drawableFile(){
+
+        String resource = this.getClass().getClassLoader().getResource("").getPath();
+
+        File emailFile = new File(resource + "/emailtemp/" + System.currentTimeMillis() + ".png");
+        if (!emailFile.exists()) {
+            try {
+                File pathDir = new File(emailFile.getParent());
+                if (!pathDir.exists()) {
+                    pathDir.mkdirs();
+                }
+                emailFile.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        int imageWidth = 1200;
+        int imageHight = 600;
+
+
+        BufferedImage bi = new BufferedImage(imageWidth, imageHight, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2 = (Graphics2D) bi.getGraphics();//得到绘制环境，开始绘画
+//        填充一个矩形
+        g2.setColor(Color.white);
+        g2.fillRect(0, 0, imageWidth, imageHight);
+//        绘制图片边框
+        g2.setColor(new Color(159, 207, 255));
+        g2.drawRect(0, 0, imageWidth - 1, imageHight - 1);
+
+        try {
+            g2.setColor(Color.black);
+            ClassPathResource fontResource=new ClassPathResource("htmlsource/simsun.ttc");
+
+            Font ft=Font.createFont(Font.TRUETYPE_FONT,fontResource.getInputStream());
+            ft=ft.deriveFont(Font.PLAIN,16);
+            g2.setFont(ft);
+            g2.drawString("测试字体abcd01234.k",40,40);
+            g2.drawLine(50,50,200,200);
+            ft=ft.deriveFont(Font.BOLD,12);
+            g2.setFont(ft);
+            g2.drawString("12号字体测试测试字体 abcd01234.!@#$%%^,.k",40,70);
+            g2.drawString("12号字体测试测试字体2abcd01234.k",40,100);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            ImageIO.write(bi, "PNG", emailFile);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return emailFile;
     }
 
 }
