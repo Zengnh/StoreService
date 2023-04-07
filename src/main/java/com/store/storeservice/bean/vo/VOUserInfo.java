@@ -1,7 +1,7 @@
 package com.store.storeservice.bean.vo;
 
-public class VOLogin {
-   public String uid= "123";
+public class VOUserInfo {
+    public String  uid= "123";
     public String user_name="0965391369";
     public String name="Test1";
     public String cover=": ";
