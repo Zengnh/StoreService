@@ -171,7 +171,6 @@ public class AppApiController {
     @ResponseBody
     @GetMapping("/testDemo2")
     public void test2(HttpServletResponse response) {
-
         //        测试字体库
         OutputStream os = null;
         InputStream is ;
@@ -232,7 +231,7 @@ public class AppApiController {
 
         try {
             g2.setColor(Color.black);
-            ClassPathResource fontResource=new ClassPathResource("htmlsource/simsun.ttc");
+            ClassPathResource fontResource=new ClassPathResource("static/simsun.ttc");
 
             Font ft=Font.createFont(Font.TRUETYPE_FONT,fontResource.getInputStream());
             ft=ft.deriveFont(Font.PLAIN,16);

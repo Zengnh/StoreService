@@ -1,11 +1,11 @@
 spring:
   application:
     name: store_service
-
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/jms_uat?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull
     username: root
-    password: ld(-fj.u?9eJ
+    password: 123456
+#    password: ld(-fj.u?9eJ
     driver-class-name: com.mysql.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
@@ -26,6 +26,9 @@ spring:
     port: 587
     username: 121632940@qq.com
     password: 腾讯校验码
+  web:
+    resources:
+      static-locations: classpath:/META-INF/resources/, classpath:/resources/, classpath:/static/, classpath:/public/, classpath:/templates/
 
 server:
   port: 8082
