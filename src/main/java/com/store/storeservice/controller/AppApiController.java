@@ -1,17 +1,12 @@
 package com.store.storeservice.controller;
 
 import com.store.storeservice.base.Result;
-import com.store.storeservice.bean.db.Center;
 import com.store.storeservice.bean.dto.DTOLogin;
 import com.store.storeservice.bean.vo.*;
-import com.store.storeservice.dao.CenterByTypeToMapper;
-import com.store.storeservice.dao.UserMapper;
 import io.swagger.annotations.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
@@ -27,10 +22,10 @@ import java.util.List;
 //@RequestMapping(value = "/api",produces="text/html; charset=UTF-8")
 @RequestMapping(value = "/api")
 public class AppApiController {
-    @Autowired
-    UserMapper userMapper;
-    @Autowired
-    CenterByTypeToMapper centerByTypeToMapper;
+//    @Autowired
+//    CenterMapper centerMapper;
+//    @Autowired
+//    CenterByTypeToMapper centerByTypeToMapper;
 
 
 
@@ -130,11 +125,11 @@ public class AppApiController {
 //        userMapper.countCenter();
 //
 //       第一种数据库查询完成
-        List<Center> count = centerByTypeToMapper.getList();
-        System.out.println("#######" + count.size());
-        for (Center c : count) {
-            System.out.println("centerName=" + c.name);
-        }
+//        List<Center> count = centerByTypeToMapper.getList();
+//        System.out.println("#######" + count.size());
+//        for (Center c : count) {
+//            System.out.println("centerName=" + c.name);
+//        }
 
 
 //        第二种 xml 查询
@@ -142,8 +137,8 @@ public class AppApiController {
 //
 //        System.out.println("2#######" + centerList.size());
 
-        int xmlcount = userMapper.countCenter();
-        System.out.println("3#######" + xmlcount);
+//        int xmlcount = centerMapper.countCenter();
+//        System.out.println("3#######" + xmlcount);
         return Result.succeed("");
     }
 

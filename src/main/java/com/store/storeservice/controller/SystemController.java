@@ -1,32 +1,14 @@
 package com.store.storeservice.controller;
 
-import com.google.zxing.BinaryBitmap;
 import com.store.storeservice.base.Result;
-import com.store.storeservice.bean.db.Center;
-import com.store.storeservice.bean.dto.DTOLogin;
-import com.store.storeservice.bean.vo.*;
-import com.store.storeservice.dao.CenterByTypeToMapper;
-import com.store.storeservice.dao.UserMapper;
 import com.store.storeservice.utils.QRCodeUtil;
 import com.store.storeservice.utils.ToolFile;
 import io.swagger.annotations.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.*;
-import java.nio.file.Files;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.Hashtable;
-import java.util.List;
 
 @Api(tags = "系统相关内容")
 @RestController
@@ -34,7 +16,6 @@ import java.util.List;
 //@RequestMapping(value = "/api",produces="text/html; charset=UTF-8")
 @RequestMapping(value = "/system")
 public class SystemController {
-
     private static String qrCode = "";
 
     static {

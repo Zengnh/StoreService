@@ -7,15 +7,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.text.SimpleDateFormat;
 
-
 @EnableScheduling//定时任务
 @Component
-@MapperScan({"com.store.storeservice.dao"})//数据库dao 类，查询所有数据
-@EnableTransactionManagement
+@MapperScan("com.store.storeservice.dao")//数据库dao 类，查询所有数据
+//@EnableTransactionManagement
 @SpringBootApplication
 public class StoreServiceApplication {
     public static void main(String[] args) {
