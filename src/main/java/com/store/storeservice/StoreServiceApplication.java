@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 public class StoreServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(StoreServiceApplication.class, args);
+//        SpringApplication.run(MyredisApplication.class, args);
     }
 
     @Bean

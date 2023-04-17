@@ -36,20 +36,20 @@ public class AppApiController {
     @ApiOperation("登录接口")
     @ResponseBody
     @RequestMapping(value = {"/user/login"}, method = {RequestMethod.POST}, produces = "application/json;charset=UTF-8")
-    public Result<VOLogin> login(DTOLogin dto) {
-        VOLogin login = new VOLogin();
+    public Result<VOUserInfo> login(DTOLogin dto) {
+        VOUserInfo login = new VOUserInfo();
         return Result.succeed(login);
     }
 
     @ApiOperation("登录接口")
     @ResponseBody
     @PostMapping(value = "/user/login4", produces = "application/json;charset=UTF-8")
-    public Result<VOLogin> loginSecond(
+    public Result<VOUserInfo> loginSecond(
             @RequestParam("mobile") String mobile,
             @RequestParam("password") String password,
             @RequestParam("type") String type
     ) {
-        VOLogin login = new VOLogin();
+        VOUserInfo login = new VOUserInfo();
         return Result.succeed(login);
     }
 
@@ -93,8 +93,8 @@ public class AppApiController {
 
     @ResponseBody
     @GetMapping("/user/getInfo/{id}")
-    public Result<VOLogin> login(@PathVariable("id") Long id) {
-        VOLogin login = new VOLogin();
+    public Result<VOUserInfo> login(@PathVariable("id") Long id) {
+        VOUserInfo login = new VOUserInfo();
         return Result.succeed(login);
     }
 
