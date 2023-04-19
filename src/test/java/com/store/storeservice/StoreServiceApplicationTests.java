@@ -48,10 +48,10 @@ class StoreServiceApplicationTests {
         if(tab2==1){
 //            表存在
         }else{
-            List<String> tabelNull=new ArrayList<>();
-            tabelNull.add("age");
-            tabelNull.add("size");
-            commonMapper.createAutoTaskResult("textTable",tabelNull);
+//            List<String> tabelNull=new ArrayList<>();
+//            tabelNull.add("age");
+//            tabelNull.add("size");
+//            commonMapper.createAutoTaskResult("textTable",tabelNull);
         }
 
 

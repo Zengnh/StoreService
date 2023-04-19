@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.store.storeservice.dao.AccountMapper">
+
+    <update id="createAccount">
+        create table IF NOT EXISTS tab_account(
+        id int not null primary key AUTO_INCREMENT comment '自增ID',
+        account varchar(64) comment '账户信息',
+        uid varchar(64) comment '关联的用户信息-user_info 表',
+        `type` int(2) default 0 comment '账户类型',
+        pwd varchar(64) comment '用户密码',
+        register_time datetime default current_timestamp comment '注册时间')
+        default charset=utf8
+    </update>
+
+    <insert id="insterAccount" parameterType="com.store.storeservice.bean.db.Account">
+        insert into tab_account('account','type','pwd','uid')
+        values(#{account.account},#{account.type},#{account.pwd},#{account.uid})
+    </insert>
+
+</mapper>

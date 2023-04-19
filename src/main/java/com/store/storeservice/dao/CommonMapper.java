@@ -12,6 +12,8 @@ import java.util.Map;
 @Mapper
 @Component
 public interface CommonMapper {
+
+
     /**
      * 判断表是否存在
      *
@@ -21,16 +23,21 @@ public interface CommonMapper {
      */
     @Select(" SELECT COUNT(*) as count FROM information_schema.TABLES WHERE table_name = #{tableName}")
     Integer existsTable(@Param("tableName") String tableName);
-//--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    void createAutoTaskResult(@Param("tableName")String tableName, @Param("cloums") List<String> cloums);
+
+    //--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    void createAutoTaskResult(@Param("tableName") String tableName, @Param("cloums") List<String> cloums);
 
     /**
      * @Description: 单纯返回id作为key的map
-     * @MapKey("id")
-     * Map<Long, Object> selectTaskResult(@Param("tableName")String tableName, @Param("startDate")Date startDate, @Param("endDate")Date endDate)
+     * @MapKey("id") Map<Long, Object> selectTaskResult(@Param("tableName")String tableName, @Param("startDate")Date startDate, @Param("endDate")Date endDate)
      */
 
-    List<Map<String, Object>> selectTaskResult(@Param("tableName")String tableName, @Param("startDate") Date startDate, @Param("endDate")Date endDate);
+    List<Map<String, Object>> selectTaskResult(@Param("tableName") String tableName, @Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
+    //校验用户表
+    void createUserInfo();
+    
+    //    校验账户表
+    void createAccount();
 
 }

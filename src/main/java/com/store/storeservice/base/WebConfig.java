@@ -21,7 +21,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(getUserTokenInterceptor())
                 .addPathPatterns("/**")
                 .excludePathPatterns("/user/login");
-        ;
+
         // 一定要加
         WebMvcConfigurer.super.addInterceptors(registry);
     }

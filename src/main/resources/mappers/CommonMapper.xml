@@ -1,16 +1,44 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.store.storeservice.dao.CommonMapper">
+
+
+    <update id="createUserInfo">
+        CREATE TABLE IF NOT EXISTS user_info
+         (id int PRIMARY KEY AUTO_INCREMENT COMMENT '自增ID',
+         uid varchar(128) UNIQUE NOT NULL COMMENT '用户ID',
+         `name` varchar(64) COMMENT '真实姓名',
+         nick_name varchar(64) COMMENT '昵称',
+         age int COMMENT '年龄',
+         sex int DEFAULT 0 COMMENT '性别：0为男，1为女',
+         achievement int DEFAULT 0 COMMENT '成就值',
+         `level` int COMMENT '用户等级',
+         job varchar(32) COMMENT '职业方向',
+         register_time datetime DEFAULT CURRENT_TIMESTAMP COMMENT '注册时间')
+         CHARACTER SET utf8 COLLATE utf8_general_ci;
+    </update>
+
+    <update id="createAccount">
+        create table IF NOT EXISTS tab_account(
+        id int not null primary key AUTO_INCREMENT comment '自增ID',
+        account varchar(64) comment '账户信息',
+        uid varchar(128) comment '关联的用户信息-user_info 表',
+        `type` int(2) default 0 comment '账户类型',
+        pwd varchar(64) comment '用户密码',
+        register_time datetime default current_timestamp comment '注册时间')
+        default charset=utf8
+    </update>
     <!-- 建表 -->
     <!-- 1.ddl使用update标签 -->
     <!-- 2.ddl使用${}取值 -->
     <!-- 3.动态列实际上只是普通的foreach, 常见问题是使用#{}取值造成语法错误 -->
     <update id="createAutoTaskResult" parameterType="map">
-        create table ${tableName} (
-        date date,
+        create table IF NOT EXISTS ${tableName} (
+        int PRIMARY KEY AUTO_INCREMENT COMMENT '自增ID'
         <foreach collection="cloums" item="listItem" separator=",">
-            ${listItem} varchar(30)
+           ,${listItem} varchar(30)
         </foreach>
+        ,cTime datetime default current_timestamp comment '注册时间'
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8
     </update>
 

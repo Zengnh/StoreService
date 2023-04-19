@@ -1,8 +1,9 @@
 package com.store.storeservice.bean.vo;
 
+import com.store.storeservice.bean.db.TableUser;
+
 public class VOUserInfo {
     public String  uid= "123";
-    public String user_name="0965391369";
     public String name="Test1";
     public String cover=": ";
     public String sex="0";
@@ -18,4 +19,10 @@ public class VOUserInfo {
     public String city_id="0";
     public String area_id="0";
     public String access_token="bf40UfRh1xFGkRckCFXYCHZaGjdKtAuapXAJXanmlf4";
+    public void setUserInfo(TableUser user){
+        uid=user.getUid();
+        name=user.getName();
+        sex=user.getSex();
+
+    }
 }
