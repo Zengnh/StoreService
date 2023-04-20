@@ -9,6 +9,7 @@ import com.store.storeservice.bean.vo.VOUserInfo;
 import com.store.storeservice.dao.AccountMapper;
 import com.store.storeservice.dao.CommonMapper;
 import com.store.storeservice.dao.UserMapper;
+import com.store.storeservice.utils.ToolTokenManager;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +62,7 @@ public class UserController {
                 QueryWrapper user = new QueryWrapper<TableUser>();
                 queryWrapper.eq("uid", account.getUid());
                 TableUser userResult = userMapper.selectOne(user);
+                ToolTokenManager.getInstance().setUInfoByToken("",userResult);
                 VOUserInfo result = new VOUserInfo();
                 result.setUserInfo(userResult);
                 return Result.succeed(result);

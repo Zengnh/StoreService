@@ -1,5 +1,7 @@
 package com.store.storeservice.base;
 
+import com.store.storeservice.bean.db.TableUser;
+import com.store.storeservice.utils.ToolTokenManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.StringUtils;
@@ -10,8 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class UserTokenInterceptors implements HandlerInterceptor {
-//    @Autowired
-//    private RedisTemplate redisTemplate;//注入redisTemplate
+
 
     public static final String TOKENID = "token ";//token的key统一前缀
 
@@ -29,18 +30,10 @@ public class UserTokenInterceptors implements HandlerInterceptor {
         }
         String token = request.getHeader("Authorization");
         if (token != null && !token.equals("")) {
-
-//            直接跳过redis 校验token ，只要有token 就可以了
-//            String key = TOKENID+token;
-//            User user=(User) redisTemplate.opsForValue().get(key);//根据token 查询用户信息
-//            if (user==null){
-//                response.setStatus(401);//无权限
-//                return true;
-//            }
-//            if (user != null) {
-//                UserThreadLocal.set(user);
-//            }
-            return true;
+          TableUser userinfo=ToolTokenManager.getInstance().getUInfoByToken(token);
+            if(userinfo!=null){
+                return true;
+            }
         }
         response.setStatus(401);//无权限
         return false;
