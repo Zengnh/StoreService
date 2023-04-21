@@ -51,22 +51,27 @@ public class UserController {
 //            插入一条数据
 //            accountMapper.insterAccount(account);
             accountMapper.insert(account);
+            String token = UUID.randomUUID().toString();
             TableUser userResult = new TableUser();
             userResult.setUid(account.getUid());
+            ToolTokenManager.getInstance().setUInfoByToken(token, userResult);
             userMapper.insert(userResult);
             VOUserInfo result = new VOUserInfo();
             result.setUserInfo(userResult);
+            result.access_token = token;
             return Result.succeed(result);
         } else {
-            if(account.getPwd().equals(login.getPassword())){
+            if (account.getPwd().equals(login.getPassword())) {
                 QueryWrapper user = new QueryWrapper<TableUser>();
                 queryWrapper.eq("uid", account.getUid());
                 TableUser userResult = userMapper.selectOne(user);
-                ToolTokenManager.getInstance().setUInfoByToken("",userResult);
+                String token = UUID.randomUUID().toString();
+                ToolTokenManager.getInstance().setUInfoByToken(token, userResult);
                 VOUserInfo result = new VOUserInfo();
                 result.setUserInfo(userResult);
+                result.access_token = token;
                 return Result.succeed(result);
-            }else{
+            } else {
                 return Result.failed("密码错误");
             }
         }
