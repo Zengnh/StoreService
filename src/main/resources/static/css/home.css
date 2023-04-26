@@ -1,0 +1,8 @@
+.content{
+    color:red;
+    font-family: 楷体;
+    font-size: 25px;
+}
+.content > img{
+    width: 30%;
+}

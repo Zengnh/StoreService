@@ -39,5 +39,6 @@ public interface CommonMapper {
     
     //    校验账户表
     void createAccount();
+    void createAttribute();
 
 }

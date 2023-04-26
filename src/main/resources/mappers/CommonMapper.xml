@@ -28,6 +28,21 @@
         register_time datetime default current_timestamp comment '注册时间')
         default charset=utf8
     </update>
+
+
+<!--属性对象，万物皆对象-->
+    <update id="createAttribute">
+        CREATE TABLE IF NOT EXISTS attribute_object
+        (id int PRIMARY KEY AUTO_INCREMENT COMMENT '对象id',
+         uid varchar(128) UNIQUE NOT NULL COMMENT '对象唯一uid',
+         `name` varchar(64) COMMENT '对象名称',
+         color varchar(64) COMMENT '对象颜色',
+         age int COMMENT '对象年份',
+        `size` int DEFAULT 0 COMMENT '属性大小',
+         create_time datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间')
+       CHARACTER SET utf8 COLLATE utf8_general_ci;
+    </update>
+
     <!-- 建表 -->
     <!-- 1.ddl使用update标签 -->
     <!-- 2.ddl使用${}取值 -->

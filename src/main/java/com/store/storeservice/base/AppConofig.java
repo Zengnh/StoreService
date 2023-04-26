@@ -35,6 +35,9 @@ public class AppConofig {
         System.out.println("---------创建账户表-----");
         commonMapper.createAccount();
 
+        System.out.println("---------创建属性表-----");
+        commonMapper.createAttribute();
+
 //        List<String> tabelNull=new ArrayList<>();
 //        tabelNull.add("age");
 //        tabelNull.add("size");
