@@ -14,7 +14,8 @@
          achievement int DEFAULT 0 COMMENT '成就值',
          `level` int COMMENT '用户等级',
          job varchar(32) COMMENT '职业方向',
-         register_time datetime DEFAULT CURRENT_TIMESTAMP COMMENT '注册时间')
+         register_time datetime DEFAULT CURRENT_TIMESTAMP COMMENT '注册时间',
+         update_time datetime DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间')
          CHARACTER SET utf8 COLLATE utf8_general_ci;
     </update>
 

@@ -78,6 +78,28 @@ public class UserController {
 
     }
 
+    @ResponseBody
+    @PostMapping(value = {"/setUserInfo"}, produces = "application/json;charset=UTF-8")
+    public Result<String> setUserInfo(@Validated @RequestBody VOUserInfo userInfo) {
+        int upLine = 0;
+        if (userInfo != null) {
+            TableUser tabUser = new TableUser();
+            tabUser.setUid(userInfo.uid);
+            tabUser.setName(userInfo.name);
+            tabUser.setSex(userInfo.sex);
+            tabUser.setLevel(1 + "");
+            tabUser.setNick_name(userInfo.nick_name);
+            tabUser.setRegister_time(System.currentTimeMillis() + "");
+            upLine = userMapper.updateByUid(tabUser);
+        }
+        if (upLine == 0) {
+            return Result.failed("更新失败");
+        } else {
+            return Result.succeed("更新完成");
+        }
+
+    }
+
     @Autowired
     CommonMapper commonMapper;
 
